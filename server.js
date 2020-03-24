@@ -1,8 +1,16 @@
-const http = require('http');
 const express = require('express');
+const env = require('dotenv')
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
 
+if (process.env.NODE_ENV !== 'production') {
+  env.load;
+}
+
 const app = express();
+
+app.get('/', (req, res) => {
+  res.send('sup girl!')
+});
 
 app.post('/sms', (req, res) => {
   const twiml = new MessagingResponse();
@@ -20,6 +28,6 @@ app.post('/sms', (req, res) => {
   res.end(twiml.toString());
 });
 
-http.createServer(app).listen(1337, () => {
-  console.log('Express server listening on port 1337');
+app.listen(3000, () => {
+  console.log('Express server listening on port 3000');
 });
