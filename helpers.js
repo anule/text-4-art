@@ -1,4 +1,4 @@
-// from AICbot by @backspace https://glitch.com/edit/#!/aicbot?path=helpers.js:1:0
+// adapted from AICbot by @backspace https://glitch.com/edit/#!/aicbot?path=helpers.js:1:0
 
 const fs = require('fs');
 const fetch = require('node-fetch');

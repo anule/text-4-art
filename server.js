@@ -21,6 +21,7 @@ app.post('/sms', (req, res) => {
   console.log('pinging AIC endpoint');
   get_random_object();
 
+  console.log('got object, building message', message)
   const data = message.data[0]
   const image =
     'https://lakeimagesweb.artic.edu/iiif/2/' +
