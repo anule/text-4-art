@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
-    "twilio": "twilio phone-numbers:update '+17732496838' --sms-url='http://localhost:3000/sms'",
+    "twilio": "twilio phone-numbers:update '+17732496838' --sms-url='http://206.189.164.222/sms'",
+    "twilio-dev": "twilio phone-numbers:update '+17732496838' --sms-url='http://localhost:3000/sms'",
     "start-dev": "nodemon server.js"
   },
   "author": "Anule Ndukwu",
