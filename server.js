@@ -2,14 +2,16 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
-const helpers = require('./helpers');
+const message = require('./message');
 
 const app = express();
 app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-  res.send('Text 7732496838 for some art')
+  res.send(message.string, message.image_url)
+  // res.send('Text 7732496838 for some art')
+
 });
 
 app.post('/sms', (req, res) => {
@@ -19,25 +21,9 @@ app.post('/sms', (req, res) => {
   const response = twiml.message();
 
   if (incoming.toLowerCase().includes('art')) {
-    response.body('You\'re getting some art!\n')
-    helpers.get_random_object(object => {
-      const string =
-        'Title: ' +
-        object.title +
-        ', Artist: ' +
-        object.artist_display +
-        ', Date: ' +
-        object.date_display +
-        ', Medium: ' +
-        object.medium_display;
-      const image =
-        'https://lakeimagesweb.artic.edu/iiif/2/' +
-        object.image_id +
-        '/full/1000,/0/default.jpg';
-
-      response.body(string);
-      response.media(image);
-    });
+    response.body('You\'re getting some art!\n');
+    response.body(message.description);
+    response.media(message.image);
   } else {
     response.body('no way! I only send art');
     response.media('https://media.giphy.com/media/l0MYSSCIrv8aUaBsQ/giphy.gif');
