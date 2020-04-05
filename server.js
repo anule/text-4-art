@@ -9,18 +9,7 @@ app.use(express.static('public'));
 app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
-  let string = ''
-  let image_id = ''
-  helpers.get_random_object(object => {
-      string = 'Title: ' + object.title +
-      ', Artist: ' + object.artist_display +
-      ', Date: ' + object.date_display +
-      ', Medium: ' + object.medium_display
-    image_id = object.image_id
-    });
-    const image = 'https://lakeimagesweb.artic.edu/iiif/2/' + image_id + '/full/1000,/0/default.jpg'
-    res.send(string);
-    res.send(image)
+  res.send('Text 7732496838 for some art')
 });
 
 app.post('/sms', (req, res) => {
@@ -31,7 +20,24 @@ app.post('/sms', (req, res) => {
 
   if (incoming.toLowerCase().includes('art')) {
     response.body('You\'re getting some art!\n')
-    response.body('Stay tuned! Something\'s coming...')
+    helpers.get_random_object(object => {
+      const string =
+        'Title: ' +
+        object.title +
+        ', Artist: ' +
+        object.artist_display +
+        ', Date: ' +
+        object.date_display +
+        ', Medium: ' +
+        object.medium_display;
+      const image =
+        'https://lakeimagesweb.artic.edu/iiif/2/' +
+        object.image_id +
+        '/full/1000,/0/default.jpg';
+
+      response.body(string);
+      response.media(image);
+    });
   } else {
     response.body('no way! I only send art');
     response.media('https://media.giphy.com/media/l0MYSSCIrv8aUaBsQ/giphy.gif');
