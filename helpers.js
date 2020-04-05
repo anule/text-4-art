@@ -4,7 +4,7 @@ const fs = require('fs');
 const fetch = require('node-fetch');
 
 module.exports = {
-  get_random_object: function(cb) {
+  get_random_object: function() {
     let timeStamp = Math.floor(Date.now() / 1000);
     let artworkRequest = {
       "resources": "artworks",
@@ -13,7 +13,8 @@ module.exports = {
         "title",
         "artist_display",
         "image_id",
-        "date_display"
+        "date_display",
+        "medium_display"
       ],
       "boost": false,
       "limit": 1,
@@ -37,21 +38,17 @@ module.exports = {
       }
     };
 
-    var options = {
-      uri: 'https://aggregator-data.artic.edu/api/v1/search',
-      method: 'POST',
-      json: artworkRequest
-    };
-
+    // Query Art Insititue of Chicago API and save response in JSON
     fetch('https://aggregator-data.artic.edu/api/v1/search', {
       method: 'POST',
       body: JSON.stringify(artworkRequest),
       headers: { 'Content-Type': 'application/json' }
-    }).then((res) => res.json())
-      .then(object => {
-        console.log('got an object', object)
-        cb(object.data[0])
-      })
+    }).then(res => {
+      console.log('saving api response...')
+      const dest = fs.createWriteStream('./message.json');
+      res.body.pipe(dest);
+    })
+      .then(obj => console.log(obj))
       .catch(e => console.log(e.statusCode, e.message));
   },
   load_image: function(url, cb) {
@@ -67,11 +64,4 @@ module.exports = {
       }
     });
   },
-  download_file: function(uri, filename, cb) {
-    request.head(uri, function(err, res, body) {
-      request(uri)
-        .pipe(fs.createWriteStream(filename))
-        .on('close', cb);
-    });
-  }
 };

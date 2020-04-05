@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const MessagingResponse = require('twilio').twiml.MessagingResponse;
+const message = require('./message.json')
 const { get_random_object } = require('./helpers')
 
 const app = express();
@@ -10,36 +11,34 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 app.get('/', (req, res) => {
   res.send('Text 7732496838 for some art')
-
 });
 
 app.post('/sms', (req, res) => {
   console.log('message received...')
-  const incoming = req.body.Body
   const twiml = new MessagingResponse();
   const response = twiml.message();
 
-  if (incoming.toLowerCase().includes('art')) {
-    get_random_object(object => {
-      let string =
-        'Title: ' + object.title +
-        ', Artist: ' + object.artist_display +
-        ', Date: ' + object.date_display +
-        ', Medium: ' + object.medium_display;
-      response.body("You're getting some art!\n");
-      response.media('https://lakeimagesweb.artic.edu/iiif/2/' + object.image_id + '/full/1000,/0/default.jpg')
-      response.body(string)
+  console.log('pinging AIC endpoint');
+  get_random_object();
 
-      res.writeHead(200, { 'Content-Type': 'text/xml' });
-      res.send(response.toString());
-    });
-  } else {
-    response.body('no way! I only send art');
-    response.media('https://media.giphy.com/media/l0MYSSCIrv8aUaBsQ/giphy.gif');
+  const data = message.data[0]
+  const image =
+    'https://lakeimagesweb.artic.edu/iiif/2/' +
+    data.image_id +
+    '/full/1000,/0/default.jpg';
+  const title = 'Title: ' + data.title
+  const artist = 'Artist: ' + data.artist_display
+  const date = 'Date: ' + data.date_display
+  const medium = 'Medium: ' + data.medium_display;
 
-      res.writeHead(200, { 'Content-Type': 'text/xml' });
-      res.send(response.toString());
-  }
+  response.body(title)
+  response.body(artist)
+  response.body(date)
+  response.body(medium)
+  response.media(image);
+
+  res.writeHead(200, { 'Content-Type': 'text/xml' });
+  res.end(twiml.toString());
 });
 
 app.listen(3000, () => {
