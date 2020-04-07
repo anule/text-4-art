@@ -18,7 +18,7 @@ app.post('/sms', (req, res) => {
   const message = twiml.message();
   let textBody = req.body.Body.toLowerCase();
 
-  if (!textBody.includes('art') && !textBody.includes('thank')) {
+  if (!textBody.includes('art') && !textBody.includes('thank') && !textBody.includes('loved') && !textBody.includes('liked')) {
     message.body('Hi! This is text-4-art 🖼, a service that brings the Art Institute of Chicago to you, one artwork at a time.\nTo receive a piece, please respond with a message that includes the word \'art\'.')
     res.writeHead(200, { 'Content-Type': 'text/xml' });
     res.end(twiml.toString());
