@@ -37,7 +37,7 @@ app.post('/sms', (req, res) => {
         data.image_id +
         '/full/1000,/0/default.jpg';
 
-      response.body(`Title: ${data.title}\n\nArtist: ${data.artist_display}\n\nDate: ${data.date_display}\n\nMedium: ${data.medium_display}`);
+      response.body(`Title: ${data.title}\n\nArtist: ${data.artist_display}\n\nDate: ${data.date_display}\n\nMedium: ${data.medium_display}\nwww.artic.edu/artworks/${data.id}`);
       response.media(image);
 
       res.writeHead(200, { 'Content-Type': 'text/xml' });
