@@ -39,7 +39,7 @@ app.post('/sms', (req, res) => {
   ) {
     console.log('sending introduction...');
     message.body(
-      "Hi! This is text-4-art 🖼, a service that brings the Art Institute of Chicago to you, one artwork at a time.\nTo receive a randomly selected piece, please respond with a message that includes the word 'art'."
+      "Hi! This is text-4-art 🖼, a service that brings the Art Institute of Chicago to you, one artwork at a time.\nTo receive a randomly selected piece, please respond with a message that includes the word 'art'.\n\n(Note: Not affiliated with the Art Institute of Chicago)"
     );
     res.writeHead(200, { 'Content-Type': 'text/xml' });
     res.end(twiml.toString());
