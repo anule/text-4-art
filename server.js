@@ -36,7 +36,7 @@ app.post('/sms', (req, res) => {
     !textBody.includes('love') &&
     !textBody.includes('like') &&
     !textBody.includes('nice')
-  ) {
+  ) { // ...otherwise send an introduction
     console.log('sending introduction...');
     message.body(
       "Hi! This is text-4-art 🖼, a service that brings the Art Institute of Chicago to you, one artwork at a time.\nTo receive a randomly selected piece, please respond with a message that includes the word 'art'.\n\n(Note: Not affiliated with the Art Institute of Chicago)"

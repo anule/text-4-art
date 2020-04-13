@@ -1,8 +1,11 @@
 {
   "name": "text-4-art",
   "version": "1.0.0",
-  "description": "Text bot that responds with random art",
+  "description": "Texting service that responds with random art from the Art Institute of Chicago",
   "main": "server.js",
+  "engines": {
+    "node": "~13.11.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
