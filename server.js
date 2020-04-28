@@ -65,9 +65,9 @@ app.post('/sms', (req, res) => {
         const response = twiml.message();
         console.log('got object, building message', data);
         const image =
-          'https://lakeimagesweb.artic.edu/iiif/2/' +
+          'https://www.artic.edu/iiif/2/' +
           data.image_id +
-          '/full/1000,/0/default.jpg';
+          '/full/843,/0/default.jpg';
 
         response.body(
           `Title: ${data.title}\n\nArtist: ${data.artist_display}\n\nDate: ${data.date_display}\n\nMedium: ${data.medium_display}\nwww.artic.edu/artworks/${data.id}`
