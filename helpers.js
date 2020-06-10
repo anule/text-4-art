@@ -39,7 +39,7 @@ module.exports = {
     };
 
     // Query Art Insititue of Chicago API and return response
-    return fetch('https://aggregator-data.artic.edu/api/v1/search', {
+    return fetch('https://api.artic.edu/api/v1/search', {
       method: 'POST',
       body: JSON.stringify(artworkRequest),
       headers: { 'Content-Type': 'application/json' }
