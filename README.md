@@ -7,7 +7,15 @@ Text +17732496838 for a random piece of art. Not affiliated with [@art-institute
 * Node.js with an Express.js server
 
 ## Author
-* **Anule Ndukwu** - [anule](https://anule.github.io)
+* **Anule Ndukwu** - [anule](https://github.com/anule)
+
+## Development
+To get started, first run `npm install` to install packages.
+
+There is a different Twilio number that can be used for development. This number only works locally, when the development server is running. To send messages locally, run these two commands, in the following order
+1. `npm run start-dev` - boots up a nodemon server that will hot-reload with changes
+2. `npm run twilio-dev` - starts an ngrok tunnel that shows you http requests and responses to the live, test number.
+The test number is written as part of the `twilio-dev` command in `package.json`.
 
 ## License
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
