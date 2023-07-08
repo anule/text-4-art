@@ -21,7 +21,7 @@
     "express": "^4.17.1",
     "node-fetch": "^2.6.1",
     "twilio": "^3.41.1",
-    "twilio-cli": "^1.11.0"
+    "twilio-cli": "^5.5.0"
   },
   "devDependencies": {
     "nodemon": "^2.0.2"
